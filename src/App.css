@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+.user-button{
+
+font-size: 18px;
+padding: 20px 40px;
+border: none;
+border-radius: 10px;
+background-color: aqua;
+cursor: pointer;
+}
