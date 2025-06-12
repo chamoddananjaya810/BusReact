@@ -1,4 +1,5 @@
 import {
+  Button,
   Paper,
   Table,
   TableBody,
@@ -20,37 +21,35 @@ const UsersTable = ({ rows }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {
-          rows.leneth>0?
-          rows.map((row) => (
-            <TableRow key={row.id} sx={{"&:last-child td,&:last-child":{border:0}}}>
+          {rows.length > 0 ? (
+            rows.map((row) => (
+              <TableRow
+                key={row.id}
+                sx={{ "&:last-child td,&:last-child": { border: 0 } }}
+              >
+                <TableCell component={"th"} scope="row">
+                  {row.id}
+                </TableCell>
+                <TableCell component={"th"} scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell component={"th"} scope="row">
+                  <Button sx={{ margin: "0px 10px" }} onClick={() => {}}>
+                    update
+                  </Button>
+                  <Button sx={{ margin: "0px 10px" }} onClick={() => {}}>
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow sx={{ "&:last-child td,&:last-child": { border: 0 } }}>
               <TableCell component={"th"} scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell component={"th"} scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell component={"th"} scope="row">
-                <button sx={{ margin: "0px 10px" }} onClick={() => {}}>
-                  update
-                </button>
-                <button sx={{ margin: "0px 10px" }} onClick={() => {}}>
-                  Delete
-                </button>
+                No Data
               </TableCell>
             </TableRow>
-          )):(
- <TableRow sx={{"&:last-child td,&:last-child":{border:0}}}>
-<TableCell component={"th"} scope="row">
-            No Data
-              </TableCell>
-    
- </TableRow>
-
-
-          )
-        
-        }
+          )}
         </TableBody>
       </Table>
     </TableContainer>
