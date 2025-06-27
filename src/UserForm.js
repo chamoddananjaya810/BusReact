@@ -1,11 +1,29 @@
-import { Button, colors, Container, Grid, Input, Typography } from "@mui/material";
-import { useState } from "react";
+import {
+  Button,
+  colors,
+  Container,
+  Grid,
+  Input,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 
-const UserForm = (props) => {
+const UserForm = ({ addUser, updateUser,submitted, data, isEdit }) => {
+  const [id, setId] = useState(0);
+  const [name, setName] = useState("");
 
-const [id,setId]=useState(0);
-const [name,setName]=useState("");
-
+  useEffect(() => {
+    if (!submitted) {
+      setId(0);
+      setName("");
+    }
+  }, [submitted]);
+  useEffect(() => {
+    if (data?.id && data.id !== 0) {
+      setId(data.id);
+      setName(data.name);
+    }
+  }, [data]);
   return (
     <Grid
       container
@@ -56,7 +74,7 @@ const [name,setName]=useState("");
             fontSize: "16px",
             width: "100px",
             display: "block",
-          }} 
+          }}
         >
           Name
         </Typography>
@@ -66,7 +84,9 @@ const [name,setName]=useState("");
           name="name"
           sx={{ width: "400px" }}
           value={name}
-          onChange={(e) => {setName(e.target.value)}}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
         />
       </Grid>
       {/* <button
@@ -84,7 +104,9 @@ const [name,setName]=useState("");
       >
         Add
       </button> */}
-      <Button variant="outlined"> Add</Button>
+      <Button variant="outlined" onClick={() => isEdit ? updateUser({id,name}): addUser({ id, name })}>
+        {isEdit ? "Update" : "Add"}
+      </Button>
     </Grid>
   );
 };
